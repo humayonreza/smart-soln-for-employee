@@ -13,12 +13,10 @@ export class LookupService {
   BackendService(data: any) {
     return this.http
       .post(this.baseUrl + 'backend_service.php', JSON.stringify(data))
-      .pipe(
-        map((resp: any) => {
+
+      .map((resp: any) => {
         console.log(resp);
         return resp;
       });
-      )
-      
   }
 }
