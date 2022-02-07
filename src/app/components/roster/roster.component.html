@@ -1,0 +1,72 @@
+<div class="container-fluid text-center">
+  <div class="row" style="margin-bottom: 60px">
+    <app-navbar></app-navbar>
+  </div>
+  <div class="row content smart-top">
+    <!-- <div class="col-sm-3 sidenav">
+      <p><a href="#">Link</a></p>
+      <p><a href="#">Link</a></p>
+      <p><a href="#">Link</a></p>
+    </div> -->
+    <div class="col-sm-12 text-left">
+      <label class="txt-header">Manage Roster</label>
+      <p>
+        Welcome to Roster Management. Through this employee can accept/reject
+        job being assigned. Employee also learn about site compliances and
+        location. Employee can perform onsite clockin/clockout through this
+        system.
+      </p>
+      <hr />
+      <h3 style="margin: 0; padding: 0">Test</h3>
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="col-sm-12" *ngIf="backendService.isAdminStaff">
+            <div class="row">Do somethings for Admin</div>
+          </div>
+          <div class="col-sm-12" *ngIf="backendService.isEmp">
+            <div class="row">Do somethings for Emp</div>
+          </div>
+          <div class="col-sm-12" *ngIf="backendService.isContractor">
+            <div class="row">Do somethings for Contractor</div>
+          </div>
+        </div>
+      </div>
+      <p>Lorem ipsum...</p>
+    </div>
+    <!-- <div class="col-sm-3 sidenav">
+      <div class="well">
+        <p>ADS</p>
+      </div>
+      <div class="well">
+        <p>ADS</p>
+      </div>
+    </div> -->
+  </div>
+</div>
+<div class="footer">
+  <table width="100%">
+    <tr>
+      <td class="txt-left" style="padding-left: 20px">
+        <img
+          src="{{ imgPath + 'org/logo.png' }}"
+          alt=""
+          style="
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin-top: -25px;
+          "
+        />
+      </td>
+      <td class="txt-right" style="padding-right: 20px">
+        <span>Welcome&nbsp;{{ loginName }}</span
+        >&nbsp;&nbsp;|&nbsp;&nbsp;<a (click)="logout()" style="color: #fff"
+          >Logout</a
+        >
+      </td>
+    </tr>
+  </table>
+</div>
+<!-- <footer class="container-fluid text-center">
+  <p>Footer Text</p>
+</footer> -->

@@ -1,0 +1,371 @@
+<div class="container-fluid text-center" style="padding-bottom: 50px">
+  <div class="row" style="margin-bottom: 60px">
+    <app-navbar></app-navbar>
+  </div>
+  <div class="row content smart-top">
+    <!-- <div class="col-sm-3 sidenav">
+      <p><a href="#">Link</a></p>
+      <p><a href="#">Link</a></p>
+      <p><a href="#">Link</a></p>
+    </div> -->
+    <div class="col-sm-12 text-left main">
+      <label class="txt-header">Compliances Management</label>
+      <p>
+        This part deals with your compliances. Please upload clear images and
+        corp out unnecessary portion of image. You can also findout which of the
+        compliances need to be renewed.
+      </p>
+      <hr />
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="col-sm-12" *ngIf="backendService.isAdminStaff">
+            <div class="row">
+              <div class="col-sm-12">List of Uploaded Documents</div>
+              <div>
+                <table class="table table-condensed">
+                  <thead>
+                    <tr>
+                      <th>Ser</th>
+                      <th>Name</th>
+                      <th class="txt-center">Docs Exp</th>
+                      <th class="txt-center">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of arrDocsAllEmp">
+                      <td>{{ data.empId }}</td>
+                      <td>{{ data.firstName + " " + data.lastName }}</td>
+                      <td class="txt-center">{{ data.totalExp }}</td>
+                      <td class="txt-center">
+                        <mat-radio-button
+                          [color]="color"
+                          value=""
+                          name="indl_doc_select"
+                          (click)="fetch_data('7', data.empId)"
+                        ></mat-radio-button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12" *ngIf="backendService.isEmp">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row">
+                  <label class="txt-header">Manage Documents</label>
+                  <hr style="margin: 0; padding: 0; border: thin solid #ddd" />
+                </div>
+                <div class="row">
+                  <div *ngIf="!arrDocsIndlEmp.length">
+                    No Document being uploaded.
+                  </div>
+                  <div *ngIf="arrDocsIndlEmp.length">
+                    <table class="table table-condensed">
+                      <thead>
+                        <tr>
+                          <th>Docs Name</th>
+                          <th>State</th>
+                          <th>Expire on</th>
+                          <th class="txt-center">Days</th>
+                          <th class="txt-center">Action</th>
+                        </tr>
+                      </thead>
+                      <!--  -->
+                      <tbody>
+                        <tr
+                          *ngFor="let data of arrDocsIndlEmp"
+                          [ngClass]="
+                            data.isSelected == 1
+                              ? 'isSelected'
+                              : 'isNotSelected'
+                          "
+                        >
+                          <td>
+                            {{ data.docName }}
+                          </td>
+                          <td>
+                            {{
+                              data.state_terrId == 1
+                                ? "QLD"
+                                : data.state_terrId == 2
+                                ? "NSW"
+                                : data.state_terrId == 3
+                                ? "ACT"
+                                : data.state_terrId == 4
+                                ? "VIC"
+                                : data.state_terrId == 5
+                                ? "TAS"
+                                : data.state_terrId == 6
+                                ? "SA"
+                                : data.state_terrId == 7
+                                ? "WA"
+                                : data.state_terrId == 8
+                                ? "NT"
+                                : "NA"
+                            }}
+                          </td>
+                          <td
+                            [ngStyle]="{
+                              color: data.daysLeft <= 40 ? 'red' : 'black'
+                            }"
+                          >
+                            {{ data.expDate }}
+                          </td>
+                          <td class="txt-center">{{ data.daysLeft }}</td>
+                          <td class="txt-center">
+                            <mat-icon
+                              (click)="manage_upload(data, false)"
+                              style="font-size: 18px; cursor: pointer"
+                              >{{ data.docExtIcon }}</mat-icon
+                            >
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <hr style="border-color: #ddd" />
+                  <div>
+                    <button mat-raised-button (click)="manage_upload({}, true)">
+                      Upload New
+                      <!-- <br />
+                      <span>user : {{ empFullName }}</span> -->
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12" *ngIf="isUpload" style="margin-top: 20px">
+                <div class="row">
+                  <label class="txt-header">{{ docMgtType }}</label>
+                  <hr style="margin: 0; padding: 0; border: thin solid #ddd" />
+                </div>
+                <div class="row">
+                  <form
+                    #b="ngForm"
+                    (ngSubmit)="submit_doc_upload_data(b.value)"
+                    autocomplete="off"
+                  >
+                    <div class="form-group">
+                      <label class="control-label" for="typeId" id="typeId"
+                        >Document Type</label
+                      >
+
+                      <select
+                        class="form-control inputCl"
+                        type="text"
+                        name="typeId"
+                        [(ngModel)]="typeId"
+                        id="typeId"
+                        (ngModelChange)="set_arr_doc_name($event)"
+                      >
+                        <option
+                          *ngFor="let data of arrDocType"
+                          [value]="data.OptVal"
+                        >
+                          {{ data.OptTxt }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label" for="docId" id="docId"
+                        >Document Name</label
+                      >
+                      <select
+                        class="form-control inputCl"
+                        name="docId"
+                        [(ngModel)]="docId"
+                        id="docId"
+                      >
+                        <option
+                          *ngFor="let data of arrDocName"
+                          [value]="data.OptVal"
+                        >
+                          {{ data.OptTxt }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label
+                        class="control-label"
+                        for="state_terrId"
+                        id="state_terrId"
+                        >Stare | Terr</label
+                      >
+                      <select
+                        class="form-control inputCl"
+                        name="state_terrId"
+                        [(ngModel)]="state_terrId"
+                        id="state_terrId"
+                      >
+                        <option
+                          *ngFor="let data of arrStateTerr"
+                          [value]="data.OptVal"
+                        >
+                          {{ data.OptTxt }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label" for="expDate" id="expDate"
+                        >Expire Date</label
+                      >
+                      <input
+                        class="form-control inputCl"
+                        type="date"
+                        name="expDate"
+                        [(ngModel)]="expDate"
+                        id="expDate"
+                        placeholder=""
+                      />
+                    </div>
+
+                    <div>
+                      <input
+                        size="3"
+                        type="hidden"
+                        name="ser"
+                        [(ngModel)]="ser"
+                        id="ser"
+                      />
+                      <input
+                        size="3"
+                        type="hidden"
+                        name="empId"
+                        [(ngModel)]="empId"
+                        id="empId"
+                      />
+                      <input
+                        size="5"
+                        type="hidden"
+                        name="imgId"
+                        [(ngModel)]="imgId"
+                        id="imgId"
+                      />
+                      <input
+                        size="3"
+                        type="hidden"
+                        name="docExtId"
+                        [(ngModel)]="backendService.docExtId"
+                        id="docExtId"
+                      />
+                      <input
+                        size="3"
+                        type="hidden"
+                        name="orgId"
+                        [(ngModel)]="orgId"
+                        id="orgId"
+                      />
+                      <input
+                        size="3"
+                        type="hidden"
+                        name="queryId"
+                        [(ngModel)]="queryIdUpload"
+                        id="queryId"
+                      />
+                    </div>
+                    <hr style="border-color: #ddd" />
+                    <div class="form-group txt-center">
+                      <table>
+                        <tr>
+                          <td style="padding-left: 3px">
+                            <div
+                              class="upload-btn-wrapper"
+                              style="cursor: pointer"
+                            >
+                              <button class="btn btn-warning" type="button">
+                                Select Doc
+                              </button>
+                              <input
+                                #fileToUpload
+                                (change)="backendService.onFileSelected($event)"
+                                type="file"
+                                name="myfile"
+                              />
+                            </div>
+                          </td>
+                          <td valign="top" style="padding-left: 3px">
+                            <button
+                              mat-raised-button
+                              type="button"
+                              [disabled]="isDownload ? false : true"
+                              (click)="
+                                view_file(
+                                  this.empId,
+                                  this.imgId,
+                                  backendService.docExtId
+                                )
+                              "
+                            >
+                              View Doc
+                            </button>
+                          </td>
+                          <td valign="top" style="padding-left: 3px">
+                            <button
+                              mat-raised-button
+                              [disabled]="isDownload ? true : false"
+                              type="button"
+                              (click)="view_doc(downloadLink, 'mydoc')"
+                            >
+                              Download
+                            </button>
+                          </td>
+                          <td valign="top">
+                            <button mat-raised-button type="submit">
+                              Submit
+                              <!-- <br />
+                        <span style="font-size: 10px">{{
+                          backendService.fileName
+                        }}</span> -->
+                            </button>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                    <!-- <div class="form-group" style="margin-top: 10px">
+                      <button mat-raised-button type="submit">
+                        Submit
+                       
+                      </button>
+                    </div> -->
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12" *ngIf="backendService.isContractor">
+            <div class="row">Do somethings for Contractor</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  <table width="100%">
+    <tr>
+      <td class="txt-left" style="padding-left: 20px">
+        <img
+          src="{{ imgPath + 'org/logo.png' }}"
+          alt=""
+          style="
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin-top: -25px;
+          "
+        />
+      </td>
+      <td class="txt-right" style="padding-right: 20px">
+        <span>Welcome&nbsp;{{ loginName }}</span
+        >&nbsp;&nbsp;|&nbsp;&nbsp;<a (click)="logout()" style="color: #fff"
+          >Logout</a
+        >
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!-- <footer class="footer container-fluid text-center">
+  <p>Footer Text</p>
+</footer> -->

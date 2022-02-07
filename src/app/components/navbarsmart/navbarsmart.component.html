@@ -1,0 +1,22 @@
+<div class="row navStyle">
+  <div class="txt-center">
+    <table width="100%">
+      <tr>
+        <td *ngFor="let data of arrNav" style="width: 80px">
+          <mat-icon routerLink="{{ data.routeTxt }}">{{
+            data.OptVal == 1
+              ? "home"
+              : data.OptVal == 2
+              ? "watch_later"
+              : data.OptVal == 3
+              ? "gavel"
+              : data.OptVal == 4
+              ? "attach_money"
+              : "forward"
+          }}</mat-icon>
+          <p routerLink="{{ data.routeTxt }}">{{ data.OptTxt }}</p>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

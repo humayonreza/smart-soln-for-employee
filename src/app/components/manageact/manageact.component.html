@@ -1,0 +1,109 @@
+<div class="container-fluid text-center">
+  <div class="row" style="margin-bottom: 60px">
+    <app-navbar></app-navbar>
+  </div>
+  <div class="row content">
+    <!-- <div class="col-sm-2 sidenav">
+      <p><a href="#">Link</a></p>
+      <p><a href="#">Link</a></p>
+      <p><a href="#">Link</a></p>
+    </div> -->
+    <div class="col-sm-12 text-left">
+      <div class="col-sm-12">
+        <div class="row">
+          <table class="table table-condensed">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Role</th>
+                <th>Email</th>
+                <!-- <th>Gender</th>
+                <th>DOB</th> -->
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of arrData2Approve">
+                <td>{{ data.firstName + " " + data.lastName }}</td>
+                <td>
+                  {{
+                    data.empTypeId == 1
+                      ? "Casual"
+                      : data.empTypeId == 2
+                      ? "Part Time"
+                      : data.empTypeId == 3
+                      ? "Full Time"
+                      : "NA"
+                  }}
+                </td>
+                <td>
+                  {{
+                    data.empRoleId == 1
+                      ? "Admin Staff"
+                      : data.empRoleId == 2
+                      ? "Security Staff"
+                      : data.empRoleId == 3
+                      ? "Cleaning Staff"
+                      : "NA"
+                  }}
+                </td>
+                <td>{{ data.empEmail }}</td>
+                <!-- <td>
+                  {{
+                    data.genderCode == 1
+                      ? "Female"
+                      : data.genderCode == 2
+                      ? "Male"
+                      : "NA"
+                  }}
+                </td>
+                <td>{{ data.dob }}</td>-->
+                <td>
+                  <mat-icon (click)="approve_emp_appl(data.ser, data.empEmail)"
+                    >check_circle_outline</mat-icon
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col-sm-2 sidenav">
+      <div class="well">
+        <p>ADS</p>
+      </div>
+      <div class="well">
+        <p>ADS</p>
+      </div>
+    </div> -->
+  </div>
+</div>
+<div class="footer">
+  <table width="100%">
+    <tr>
+      <td class="txt-left" style="padding-left: 20px">
+        <img
+          src="{{ imgPath + 'org/logo.png' }}"
+          alt=""
+          style="
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin-top: -25px;
+          "
+        />
+      </td>
+      <td class="txt-right" style="padding-right: 20px">
+        <span>Welcome&nbsp;{{ loginName }}</span
+        >&nbsp;&nbsp;|&nbsp;&nbsp;<a (click)="logout()" style="color: #fff"
+          >Logout</a
+        >
+      </td>
+    </tr>
+  </table>
+</div>
+<!-- <footer class="container-fluid text-center">
+  <p>Footer Text</p>
+</footer> -->

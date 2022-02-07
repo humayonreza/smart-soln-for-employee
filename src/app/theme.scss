@@ -1,165 +1,158 @@
-.full-width {
-  width: 100%;
+body {
+  font-family: "Arial Narrow";
+  color: #444;
 }
-.padding-xs {
-  padding: 2px;
+.lblCl {
+  text-align: right;
+  padding-right: 0;
+  padding-top: 5px;
 }
-.padding-sm {
-  padding: 2px 5px 2px 5px;
+.form-group {
+  padding: 11px;
 }
-.padding-md {
-  padding: 4px 10px 4px 10px;
+h1 {
+  padding-top: 0;
+  margin-top: 0;
 }
-.padding-bg {
-  padding: 8px 10px 8px 10px;
+.smartNav {
+  display: none;
 }
-.padding-lg {
-  padding: 15px;
-}
-.padding-xl {
-  padding: 20px;
+//
+@media screen and (max-width: 767px) {
+  .footer {
+    // display: none;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-align: center;
+  }
+  .main {
+    padding: 0px;
+  }
+  .sidenav {
+    height: auto;
+    padding: 15px;
+  }
+  .row.content {
+    height: auto;
+  }
+  .form-group {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  // bsNav == Big Screen Nav
+  .sidenav,
+  .bsNav {
+    display: none;
+  }
+  .smartNav {
+    display: inline;
+  }
+  .smart-top {
+    margin-top: 35px;
+  }
 }
 
-.margin-xs {
-  margin: 2px;
+.navStyle {
+  background-color: tomato;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  padding: 10px 0px 0px 0px;
+  width: 100%;
+  z-index: 9999;
+  opacity: 1;
 }
-.margin-sm {
-  margin: 2px 5px 2px 5px;
+
+// Mat Icon ==============
+mat-icon {
+  cursor: pointer;
+  padding: 0px 3px 0px 3px;
+  margin: 0px 3px 0px 3px;
 }
-.margin-md {
-  margin: 4px 10px 4px 10px;
+
+// Text Style ========================
+.txt-center {
+  text-align: center;
 }
-.margin-bg {
-  margin: 8px 10px 8px 10px;
+.txt-left {
+  text-align: left;
 }
-.margin-lg {
-  margin: 15px;
+.txt-right {
+  text-align: right;
 }
-.margin-xl {
-  margin: 20px;
+.txt-header {
+  font-size: 22px;
+  color: #888;
+  font-weight: bold;
 }
-.space-null {
+// Frame =============================
+.main {
+  padding: 5px 30px 5px 30px;
+}
+.frameA {
+  padding: 30px;
+  width: 400px;
+  height: 250px;
+  border: thin solid #999;
+  border-radius: 10px;
+  background-color: #999;
+}
+.frameB {
+  border: thin solid #ddd;
+  border-radius: 10px;
+}
+.form-group {
   padding: 0;
   margin: 0;
 }
-.space-sm {
-  padding: 2px;
+// Button ============================
+.btnA {
+  background-color: #999;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
   margin: 2px;
 }
-.space-bg {
-  padding: 5px;
-  margin: 5px;
+.btnC {
+  width: 110px;
 }
-.space-lg {
-  padding: 10px;
-  margin: 10px;
+.btn-navbar-smart {
+  background-color: aqua;
+  margin: 15px;
 }
-// ============ Text Align ========================
-.pull-center {
-  text-align: center;
-}
-.pull-left {
-  text-align: left;
-}
-.pull-right {
-  text-align: right;
-}
-// ============ Text Size/Color ========================
-.txt-xs {
-  font-size: 9px;
-}
-.txt-sm {
-  font-size: 12px;
-}
-.txt-md {
-  font-size: 15px;
-}
-.txt-bg {
-  font-size: 18px;
-}
-.txt-xl {
-  font-size: 25px;
-}
-.txt-bold {
-  font-weight: bold;
-}
-.txt-white {
-  color: #fff;
-}
-.txt-offwhite {
-  color: #888;
-}
-.txt-black {
-  color: #000;
-}
-.txt-blue {
-  color: blue;
-}
-.txt-brown {
-  color: brown;
-}
-
-.cursorP {
-  cursor: pointer;
-}
-// ================= Border ==========================
-.border-light {
-  border: thin solid #999;
-}
-// ====================== Background Color =============
-.bg-white1 {
-  background-color: #fff;
-}
-.bg-white2 {
+.btn-upload,
+.btn-submit {
   background-color: #eee;
 }
-.bg-white3 {
-  background-color: #ddd;
-}
-.bg-white4 {
-  background-color: #cccc;
-}
-
-.bg-black1 {
-  background-color: #000;
-}
-.bg-black2 {
-  background-color: #111;
-}
-.bg-black3 {
-  background-color: #222;
-}
-.bg-black4 {
-  background-color: #333;
-}
-.bg-green {
-  background-color: rgb(85, 177, 85);
-}
-// ================ Class Active / Inactive ============================
+//  Active | Not Active
 .active {
-  color: #fff;
+  color: red;
 }
-.inactive {
-  color: #999;
+.not-active {
+  color: black;
 }
-.nav-link {
-  color: #999;
+.isNotSelected {
+  background-color: #fff;
+  font-weight: normal;
+  font-style: normal;
 }
-// =============== Customized DOM Element ==========
-::ng-deep .mat-form-field {
-  .mat-input-element {
-    color: slategray;
-  }
-  .mat-form-field-label {
-    color: slategray;
-  }
-  .mat-form-field-underline {
-    background-color: slategray;
-  }
-  .mat-form-field-ripple {
-    background-color: slategray;
-  }
-  .mat-form-field-required-marker {
-    color: slategray;
-  }
+.isSelected {
+  background-color: #eee;
+  font-weight: bold;
+  font-style: italic;
+}
+// ========= footer
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  border-top: thin solid #000;
+  color: white;
+  text-align: center;
 }

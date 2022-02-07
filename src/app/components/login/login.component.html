@@ -1,0 +1,47 @@
+<div class="col-sm-12">
+  <div class="row" style="padding: 20px; margin-top: 50px">
+    <div class="col-sm-offset-4 col-sm-4 txt-center">
+      <img
+        src="{{ imgPath + 'org/logo.png' }} "
+        style="width: 150px; height: 150px; border-radius: 50%"
+      />
+    </div>
+    <div class="col-sm-offset-4 col-sm-4">
+      <form #m="ngForm" autocomplete="off" (ngSubmit)="login(m.value)">
+        <div class="input-group" style="margin-bottom: 5px">
+          <span class="input-group-addon" style="background-color: red"
+            ><i class="glyphicon glyphicon-user" style="color: #fff"></i
+          ></span>
+          <input
+            class="form-control"
+            type="text"
+            name="UserId"
+            [(ngModel)]="UserId"
+            id="UserId"
+            placeholder="User id"
+            style="border: thin solid red"
+          />
+        </div>
+        <div class="input-group" style="margin-bottom: 5px">
+          <span class="input-group-addon" style="background-color: red"
+            ><i class="glyphicon glyphicon-lock" style="color: #fff"></i
+          ></span>
+          <input
+            class="form-control"
+            type="text"
+            name="Password"
+            [(ngModel)]="Password"
+            id="Password"
+            placeholder="Password"
+            style="border: thin solid red"
+          />
+        </div>
+        <div class="col-sm-12">
+          <div class="row">
+            <button mat-raised-button type="submit">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
